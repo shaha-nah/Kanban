@@ -8,48 +8,24 @@
     </div>
 
     <div class="board">
+        <div class="board-bar">
+            <p class="board-name">
+                {{ board.name }}
+            </p>
+          </div>
         <div class="board-wrapper">
-            <div class="board-columns">
-                <div class="board-column pink">
+            <div class="board-columns" cdkDropListGroup>
+                <div class="board-column" *ngFor="let column of board.columns">
                     <div class="column-title">
-                        Ideas
+                        {{column.name}}
                     </div>
-                    <div class="tasks-container">
-                        <div class="task">
-                            This is not an idea
-                        </div>
-                        <div class="task">
-                            This is not an idea
-                        </div>
-                    </div>
-                </div>
-                <div class="board-column purple">
-                    <div class="column-title">
-                        Research
-                    </div>
-                    <div class="tasks-container">
-                        <div class="task">
-                            This is not a research
-                        </div>
-                    </div>
-                </div>
-                <div class="board-column blue">
-                    <div class="column-title">
-                        Todo
-                    </div>
-                    <div class="tasks-container">
-                        <div class="task">
-                            This is not a todo
-                        </div>
-                    </div>
-                </div>
-                <div class="board-column green">
-                    <div class="column-title">
-                        Done
-                    </div>
-                    <div class="tasks-container">
-                        <div class="task">
-                            This is not done
+                    <div class="tasks-container"
+                    cdkDropList
+                    #todoList="cdkDropList"
+                    [cdkDropListData] = "column.tasks"
+                    (cdkDropListDropped) = "drop($event)">
+                        <div class="task" *ngFor="let item of column.tasks" cdkDrag>
+                            {{item}}
                         </div>
                     </div>
                 </div>
